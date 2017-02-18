@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response, Jsonp, URLSearchParams, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -11,21 +11,9 @@ export class UserService {
 
   constructor(
     private http: Http,
-    private jsonp: Jsonp,
   ) {
     this.times=0;
   }
-  /**
-   * https://github.com/angular/angular/pull/14270
-   * http2.4.7だとバグがあるみたいなので、それに対処
-   */
-  /**
-    let params = new URLSearchParams();
-    params.set('callback', '__ng_jsonp__.__req'+this.times+'.finished');
-    this.times++;
-    return this.jsonp.post("http://127.0.0.1:3000/users", headers, options)
-      .map(this.extractData)
-   */
   /**
    * ユーザの作成のリクエストの送信
    */
@@ -33,7 +21,7 @@ export class UserService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://127.0.0.1:3000/users", body, options)
+    return this.http.post("http://localhost:3000/users", body, options)
       .map(this.extractData)
   }
 
@@ -44,15 +32,12 @@ export class UserService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://127.0.0.1:3000/logins", body, options)
+    return this.http.post("http://localhost:3000/logins", body, options)
       .map(this.extractData)
   }
 
   getUsers(): Observable<any>{
-    let params = new URLSearchParams();
-    params.set('callback', '__ng_jsonp__.__req'+this.times+'.finished');
-    this.times++;
-    return this.jsonp.get("http://127.0.0.1:3000/users?" + params)
+    return this.http.get("http://localhost:3000/users")
       .map(this.extractData)
   }
 
