@@ -54,6 +54,7 @@ export class UserService {
           throw new Error('Bad response status: ' + res.status);
       }
       let body = res.json();
+      console.log(body)
       return body || { };
   }
   // エラー処理

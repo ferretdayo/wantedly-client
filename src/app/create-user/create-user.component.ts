@@ -54,6 +54,7 @@ export class CreateUserComponent implements OnInit {
       })
       .subscribe(
         data => {
+          console.log(data)
           this.name = ""
           this.email = ""
           this. password = ""
