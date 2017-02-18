@@ -10,7 +10,11 @@ import { UserService } from '../user.service';
 })
 export class CreateUserComponent implements OnInit {
 
-  errorMessage: string;
+  msg: string
+  name: string = ""
+  email: string = ""
+  password: string = ""
+
 
   constructor(private userService: UserService) { }
 
@@ -18,10 +22,16 @@ export class CreateUserComponent implements OnInit {
   }
 
   create(){
-    this.userService.createUser()
+    this.userService.createUser({name: this.name, email: this.email, password: this.password})
       .subscribe(
-        data => console.log(data),
-        error =>  this.errorMessage = <any>error
+        data => {
+          this.name = ""
+          this.email = ""
+          this. password = ""
+          console.log(data)
+          this.msg = "success to create user"
+        },
+        error =>  this.msg = <any>error
       );
   }
 

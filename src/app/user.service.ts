@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Http, Response, Jsonp, URLSearchParams } from '@angular/http';
+import { Http, Response, Jsonp, URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
@@ -15,18 +15,24 @@ export class UserService {
   ) {
     this.times=0;
   }
-
-  createUser(): Observable<any[]>{
-    /**
-     * https://github.com/angular/angular/pull/14270
-     * http2.4.7だとバグがあるみたいなので、それに対処
-     */
+  /**
+   * https://github.com/angular/angular/pull/14270
+   * http2.4.7だとバグがあるみたいなので、それに対処
+   */
+  /**
     let params = new URLSearchParams();
     params.set('callback', '__ng_jsonp__.__req'+this.times+'.finished');
     this.times++;
-    return this.jsonp.get("http://127.0.0.1:3000/users?" + params)
-      .map(this.extractData);
-      //.catch(this.handleError);
+    return this.jsonp.post("http://127.0.0.1:3000/users", headers, options)
+      .map(this.extractData)
+   */
+
+  createUser(data: Object): Observable<any[]>{
+    let body = JSON.stringify(data);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post("http://127.0.0.1:3000/users", body, options)
+      .map(this.extractData)
   }
 
   // レスポンスデータの整形処理
