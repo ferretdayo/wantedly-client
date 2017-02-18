@@ -54,10 +54,11 @@ export class CreateUserComponent implements OnInit {
       })
       .subscribe(
         data => {
+          console.log(data)
           this.name = ""
           this.email = ""
-          this. password = ""
-          this.msg = "success to create user"
+          this.password = ""
+          this.msg = data.msg
         },
         error =>  this.msg = <any>error
       );

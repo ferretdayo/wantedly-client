@@ -26,12 +26,25 @@ export class UserService {
     return this.jsonp.post("http://127.0.0.1:3000/users", headers, options)
       .map(this.extractData)
    */
-
-  createUser(data: Object): Observable<any[]>{
+  /**
+   * ユーザの作成のリクエストの送信
+   */
+  createUser(data: Object): Observable<any>{
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http.post("http://127.0.0.1:3000/users", body, options)
+      .map(this.extractData)
+  }
+
+  /**
+   * ログインのリクエストの送信
+   */
+  loginUser(data: Object): Observable<any>{
+    let body = JSON.stringify(data);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post("http://127.0.0.1:3000/logins", body, options)
       .map(this.extractData)
   }
 
@@ -41,6 +54,7 @@ export class UserService {
           throw new Error('Bad response status: ' + res.status);
       }
       let body = res.json();
+      console.log(body)
       return body || { };
   }
   // エラー処理
