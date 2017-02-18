@@ -15,20 +15,48 @@ export class CreateUserComponent implements OnInit {
   email: string = ""
   password: string = ""
 
+  /**
+   * errorMsg
+   */
+  nameError: string = ""
+  emailError: string = ""
+  passwordError: string = ""
 
   constructor(private userService: UserService) { }
 
   ngOnInit() {
   }
 
+  /**
+   * ユーザの作成
+   */
   create(){
-    this.userService.createUser({name: this.name, email: this.email, password: this.password})
+    if(this.name === "")
+      this.nameError = "Error"
+    else
+      this.nameError = ""
+    if(this.email === "")
+      this.emailError = "Error"
+    else
+      this.emailError = ""
+    if(this.password === "")
+      this.passwordError = "Error"
+    else
+      this.passwordError = ""
+    
+    if(this.nameError !== "" || this.emailError !== "" || this.passwordError !== "")
+      return;
+    
+    this.userService.createUser({
+        name: this.name,　
+        email: this.email, 
+        password: this.password
+      })
       .subscribe(
         data => {
           this.name = ""
           this.email = ""
           this. password = ""
-          console.log(data)
           this.msg = "success to create user"
         },
         error =>  this.msg = <any>error

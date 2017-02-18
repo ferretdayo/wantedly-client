@@ -3,10 +3,21 @@
 <div class="form">
   name: 
   <input id="name" type="text" [(ngModel)]="name" placeholder="name"><br>
+  <div class="error">
+    {{nameError}}
+  </div>
+
   email: 
   <input id="email" type="email" [(ngModel)]="email" placeholder="hoge@example.com"><br>
+  <div class="error">
+    {{emailError}}
+  </div>
+
   password: 
   <input id="pass" type="password" [(ngModel)]="password"><br>
+  <div class="error">
+    {{passwordError}}
+  </div>
   <button type="button" class="btn btn-primary" (click)="create()">アカウント作成</button>
 </div>
 <div class="msg">
