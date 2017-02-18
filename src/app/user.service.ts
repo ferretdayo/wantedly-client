@@ -29,7 +29,7 @@ export class UserService {
   /**
    * ユーザの作成のリクエストの送信
    */
-  createUser(data: Object): Observable<any[]>{
+  createUser(data: Object): Observable<any>{
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -40,7 +40,7 @@ export class UserService {
   /**
    * ログインのリクエストの送信
    */
-  loginUser(data: Object): Observable<any[]>{
+  loginUser(data: Object): Observable<any>{
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

@@ -13,6 +13,9 @@ export class LoginComponent implements OnInit {
   email: string
   password: string
 
+  emailError: string
+  passwordError: string
+
   constructor(
     private userService: UserService
   ) { }
@@ -20,7 +23,22 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * login処理
+   */
   login(){
+    if(this.email === "")
+      this.emailError = "Error"
+    else
+      this.emailError = ""
+    if(this.password === "")
+      this.passwordError = "Error"
+    else
+      this.passwordError = ""
+    
+    if(this.emailError !== "" || this.passwordError !== "")
+      return;
+
     this.userService.loginUser({
         email: this.email, 
         password: this.password
@@ -28,8 +46,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         data => {
           this.email = ""
-          this. password = ""
-          this.msg = "success to create user"
+          this.password = ""
+          this.msg = data.msg
         },
         error =>  this.msg = <any>error
       );
