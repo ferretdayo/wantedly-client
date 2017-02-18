@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
 import { UserService } from '../user.service';
 
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
   passwordError: string
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -48,9 +50,12 @@ export class LoginComponent implements OnInit {
           this.email = ""
           this.password = ""
           this.msg = data.msg
+          if(data.status === true){
+            this.router.navigate(['/home'])
+          }
         },
         error =>  this.msg = <any>error
-      );
+      )
   }
 
 }

@@ -48,6 +48,14 @@ export class UserService {
       .map(this.extractData)
   }
 
+  getUsers(): Observable<any>{
+    let params = new URLSearchParams();
+    params.set('callback', '__ng_jsonp__.__req'+this.times+'.finished');
+    this.times++;
+    return this.jsonp.get("http://127.0.0.1:3000/users?" + params)
+      .map(this.extractData)
+  }
+
   // レスポンスデータの整形処理
   private extractData(res: Response) {
       if (res.status < 200 || res.status >= 300) {
