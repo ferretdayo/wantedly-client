@@ -2,9 +2,9 @@
 
 <div class="form">
   email: 
-  <input id="email" type="email" placeholder="hoge@example.com"><br>
+  <input id="email" type="email" [(ngModel)]="email" placeholder="hoge@example.com"><br>
   password: 
-  <input id="pass" type="password" value=""><br>
-  <button type="button" class="btn btn-primary">ログイン</button>
+  <input id="pass" type="password" [(ngModel)]="password"><br>
+  <button type="button" class="btn btn-primary" (click)="login()">ログイン</button>
 </div>
 <a routerLink="/create">新規登録はこちらから</a>
