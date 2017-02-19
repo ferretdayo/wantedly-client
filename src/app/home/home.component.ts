@@ -56,6 +56,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status === true){
+            this.skill = ""
             console.log("success to add skillTag");
           }
         },
