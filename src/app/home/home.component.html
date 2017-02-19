@@ -1,3 +1,16 @@
-<p>
-  home works!
-</p>
+<h2>User Page</h2>
+<div class="page">
+  <div class="your-info">
+    <h3>{{loginUser.name}}さん</h3>
+    <hr>
+    <div>
+      <h4 style="display: inline-block">スキル・特徴</h4>
+      <button class="btn btn-primary">スキルを追加する</button>
+    </div>
+  </div>
+  <div class="recommend">
+    <ul *ngFor="let user of users">
+      <li><a (click)="detail(user.id)">{{user.name}}</a></li>
+    </ul>
+  </div>
+</div>

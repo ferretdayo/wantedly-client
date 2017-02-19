@@ -11,7 +11,8 @@ import { UserService } from '../user.service';
 export class HomeComponent implements OnInit {
 
   msg: string;
-  users: any[];
+  users: any[] = [];
+  loginUser: any = {};
 
   constructor(
     private userService: UserService
@@ -25,12 +26,14 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => {
           this.users = data.users
+          this.loginUser = data.users[0]
           this.msg = data.user_id
         },
         error =>  this.msg = <any>error
       );
   }
 
-  
-
+  detail(user_id: string){
+    console.log(user_id);
+  }
 }
