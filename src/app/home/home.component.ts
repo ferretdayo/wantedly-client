@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit {
           this.users = data.users
           this.loginUser = data.users[0]
           this.msg = data.user_id
-          this.showSkill();
+          this.showSkill(this.loginUser.id);
         },
         error =>  this.msg = <any>error
       );
@@ -57,6 +57,7 @@ export class HomeComponent implements OnInit {
         data => {
           if(data.status === true){
             this.skill = ""
+            this.showSkill(this.loginUser.id)
             console.log("success to add skillTag");
           }
         },
@@ -67,8 +68,8 @@ export class HomeComponent implements OnInit {
   /**
    * ログインしたユーザのタグ情報を取得
    */
-  showSkill(){
-    this.skillService.getUserSkill(this.loginUser.id)
+  showSkill(user_id: number){
+    this.skillService.getUserSkill(user_id)
       .subscribe(
         data => {
           if(data.status === true){

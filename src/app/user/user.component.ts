@@ -68,6 +68,7 @@ export class UserComponent implements OnInit {
           if(data.status === true){
             this.skill = ""
             console.log("success to add skillTag");
+            this.showSkill(this.user.id)
           }
         },
         error =>  this.msg = <any>error
