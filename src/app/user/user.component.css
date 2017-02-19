@@ -1,0 +1,30 @@
+.page{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+.your-info{
+    width: 70%;
+}
+
+.recommend{
+    width: 30%;
+}
+
+.skill-button{
+    margin-right: 100px;
+}
+
+ul li{
+    list-style-type: none;
+    text-align: center;
+}
+li a{
+    display: block;
+    cursor: pointer;
+    background-color: #cdc333;
+    text-decoration: none;
+    width: 150px;
+    height: 20px;
+}

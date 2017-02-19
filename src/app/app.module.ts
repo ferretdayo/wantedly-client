@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
+import { UserComponent } from './user/user.component';
 
 
 
@@ -19,7 +20,8 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     CreateUserComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,11 @@ import { HomeComponent } from './home/home.component';
         path: 'home',
         pathMatch: 'full',
         component: HomeComponent,
+      },
+      {
+        path: 'user/:id',
+        pathMatch: 'full',
+        component: UserComponent,
       }
     ])
   ],

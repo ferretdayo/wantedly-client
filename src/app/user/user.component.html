@@ -1,11 +1,11 @@
 <h2>User Page</h2>
-<div class="page">
+<div class="page" *ngIf="!error">
   <div class="your-info">
-    <h3>{{loginUser.name}}さん</h3>
+    <h3>{{user.name}}さん</h3>
     <hr>
     <div>
       <h4 style="display: inline-block">スキル・特徴</h4>
-      <button class="btn btn-primary skill-button" (click)="staticModal.show()">スキルを追加する</button>
+      <button class="btn btn-primary skill-button" (click)="staticModal.show()">スキルを推薦する</button>
     </div>
     <div>
       <p *ngFor="let tag of userTags">{{tag.tag}}</p>
@@ -17,6 +17,9 @@
       <li><a [routerLink]="['/user', user.id]">{{user.name}}</a></li>
     </ul>
   </div>
+</div>
+<div *ngIf="error">
+  ユーザがいません
 </div>
 
 <!-- Modal -->
