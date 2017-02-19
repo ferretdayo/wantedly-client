@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
           this.password = ""
           this.msg = data.msg
           if(data.status === true){
-            console.log(data.session);
+            console.log(data.current_user);
             this.router.navigate(['/home'])
           }
         },
