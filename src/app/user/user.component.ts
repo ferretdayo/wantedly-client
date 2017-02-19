@@ -1,26 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import { CanActivate, Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../user.service';
 import { SkillService } from '../skill.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  selector: 'app-user',
+  templateUrl: './user.component.html',
+  styleUrls: ['./user.component.css'],
   providers: [UserService, SkillService]
 })
-export class HomeComponent implements OnInit {
+export class UserComponent implements OnInit {
 
   msg: string
   users: any[] = []
   loginUser: any = {}
+  user: any = {}
   userTags: any[]
   skill: string
+  error: boolean = false
 
   constructor(
     private userService: UserService,
     private skillService: SkillService,
+    private router: ActivatedRoute
   ) { 
+  }
+
+  ngOnInit() {
     /**
      * 全ユーザの表示
      */
@@ -30,13 +37,16 @@ export class HomeComponent implements OnInit {
           this.users = data.users
           this.loginUser = data.users[0]
           this.msg = data.user_id
-          this.showSkill();
         },
         error =>  this.msg = <any>error
       );
-  }
-
-  ngOnInit() {
+    /**
+     * pathのparamの選択されたユーザIDからその人のスキルを表示
+     */
+    this.router.params.subscribe(params => {
+      let id = params['id'];
+      this.showSkill(id);
+    });
   }
 
   /**
@@ -49,7 +59,7 @@ export class HomeComponent implements OnInit {
     console.log(this.skill)
     // スキルのタグの追加
     this.skillService.addSkillTag({
-        id: this.loginUser.id,          /* 誰に向けてのタグか */
+        id: this.user.id,          /* 誰に向けてのタグか */
         tag: this.skill,                /* タグの値 */
         add_userid: this.loginUser.id   /* 誰が追加したか */
       })
@@ -67,19 +77,22 @@ export class HomeComponent implements OnInit {
   /**
    * ログインしたユーザのタグ情報を取得
    */
-  showSkill(){
-    this.skillService.getUserSkill(this.loginUser.id)
+  showSkill(user_id: number){
+    this.skillService.getUserSkill(user_id)
       .subscribe(
         data => {
           if(data.status === true){
             this.userTags = data.tag
+            this.user = data.user
+            this.error = false
+          }else{
           }
         },
-        error =>  this.msg = <any>error
+        error =>  {
+          this.msg = <any>error
+          this.error = true
+        }
       )
   }
 
-  detail(user_id: string){
-    console.log(user_id);
-  }
 }
