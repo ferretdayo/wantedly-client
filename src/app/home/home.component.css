@@ -12,6 +12,10 @@
     width: 30%;
 }
 
+.skill-button{
+    margin-right: 100px;
+}
+
 ul li{
     list-style-type: none;
     text-align: center;

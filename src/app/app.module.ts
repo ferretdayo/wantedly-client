@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule }   from '@angular/router';
 
-import { ButtonsModule } from 'ng2-bootstrap';
+import { ButtonsModule, ModalModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './app.component';
 import { CreateUserComponent } from './create-user/create-user.component';
@@ -27,6 +27,7 @@ import { HomeComponent } from './home/home.component';
     HttpModule,
     JsonpModule,
     ButtonsModule.forRoot(),
+    ModalModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',

@@ -18,7 +18,7 @@ export class SkillService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:3000/users", body, options)
+    return this.http.post("http://localhost:3000/tags", body, options)
       .map(this.extractData)
   }
 
@@ -30,7 +30,7 @@ export class SkillService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:3000/users", body, options)
+    return this.http.post("http://localhost:3000/tags", body, options)
       .map(this.extractData)
   }
 
@@ -38,7 +38,7 @@ export class SkillService {
    * ユーザのスキル情報を取得
    */
   getUserSkill(user_id: number){
-    return this.http.get("http://localhost:3000/user/" + user_id)
+    return this.http.get("http://localhost:3000/users/" + user_id)
       .map(this.extractData)
   }
 
