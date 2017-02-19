@@ -9,6 +9,7 @@ import { ButtonsModule } from 'ng2-bootstrap';
 import { AppComponent } from './app.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
 
 
 
@@ -17,7 +18,8 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     CreateUserComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -35,6 +37,11 @@ import { LoginComponent } from './login/login.component';
         path: 'create',
         pathMatch: 'full',
         component: CreateUserComponent
+      },
+      {
+        path: 'home',
+        pathMatch: 'full',
+        component: HomeComponent,
       }
     ])
   ],

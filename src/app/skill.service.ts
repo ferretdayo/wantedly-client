@@ -5,19 +5,28 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class UserService {
-
-  times: number;
+export class SkillService {
 
   constructor(
     private http: Http,
   ) {
-    this.times=0;
   }
   /**
-   * ユーザの作成のリクエストの送信
+   * Skillの追加
    */
-  createUser(data: Object): Observable<any>{
+  addSkillTag(data: Object): Observable<any>{
+    let body = JSON.stringify(data);
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post("http://localhost:3000/users", body, options)
+      .map(this.extractData)
+  }
+
+
+  /**
+   * Skillに１つカウント（押したユーザの）追加
+   */
+  addSkill(data: Object): Observable<any>{
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
@@ -26,21 +35,10 @@ export class UserService {
   }
 
   /**
-   * ログインのリクエストの送信
+   * ユーザのスキル情報を取得
    */
-  loginUser(data: Object): Observable<any>{
-    let body = JSON.stringify(data);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:3000/logins", body, options)
-      .map(this.extractData)
-  }
-
-  /**
-   * 全てのユーザを取得
-   */
-  getUsers(): Observable<any>{
-    return this.http.get("http://localhost:3000/users")
+  getUserSkill(user_id: number){
+    return this.http.get("http://localhost:3000/user/" + user_id)
       .map(this.extractData)
   }
 
