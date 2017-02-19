@@ -5,12 +5,34 @@
     <hr>
     <div>
       <h4 style="display: inline-block">スキル・特徴</h4>
-      <button class="btn btn-primary">スキルを追加する</button>
+      <button class="btn btn-primary skill-button" (click)="staticModal.show()">スキルを追加する</button>
+    </div>
+    <div>
+      <p *ngFor="let data of userTag">{{data.tag}}</p>
     </div>
   </div>
   <div class="recommend">
     <ul *ngFor="let user of users">
       <li><a (click)="detail(user.id)">{{user.name}}</a></li>
     </ul>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
+     tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">スキルの追加</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="staticModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <input type="text" [(ngModel)]="skill" placeholder="PHP,Java,etc...">
+        <button class="btn btn-success" (click)="addTag()">追加</button>
+      </div>
+    </div>
   </div>
 </div>
