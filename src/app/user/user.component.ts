@@ -17,6 +17,7 @@ export class UserComponent implements OnInit {
   loginUser: any = {}
   user: any = {}
   userTags: any[]
+  taggerUser: any[]
   skill: string
   error: boolean = false
 
@@ -76,15 +77,16 @@ export class UserComponent implements OnInit {
   }
 
   /**
-   * ログインしたユーザのタグ情報を取得
+   * ログインしたユーザのタグ情報とユーザ情報を取得
    */
   showSkill(user_id: number){
     this.skillService.getUserSkill(user_id)
       .subscribe(
         data => {
           if(data.status === true){
-            this.userTags = data.tag
             this.user = data.user
+            this.userTags = data.tag
+            this.taggerUser = data.taggerUser
             this.error = false
           }else{
           }
@@ -94,6 +96,10 @@ export class UserComponent implements OnInit {
           this.error = true
         }
       )
+  }
+
+  relateTag(userTags: any[], taggerUser: any[]){
+    
   }
 
 }

@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   users: any[] = []
   loginUser: any = {}
   userTags: any[]
+  userTagsCnt: any[]
   skill: string
 
   constructor(
@@ -74,6 +75,8 @@ export class HomeComponent implements OnInit {
         data => {
           if(data.status === true){
             this.userTags = data.tag
+            this.userTagsCnt = data.tagCnt
+            console.log(this.userTagsCnt)
           }
         },
         error =>  this.msg = <any>error
