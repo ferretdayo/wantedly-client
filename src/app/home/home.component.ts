@@ -14,8 +14,7 @@ export class HomeComponent implements OnInit {
   msg: string
   users: any[] = []
   loginUser: any = {}
-  userTags: any[]
-  userTagsCnt: any[]
+  taggedUser: any[]
   skill: string
 
   constructor(
@@ -74,13 +73,32 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => {
           if(data.status === true){
-            this.userTags = data.tag
-            this.userTagsCnt = data.tagCnt
-            console.log(this.userTagsCnt)
+            this.taggedUser = this.getTagRelation(data.taggedUser)
+            console.log(this.taggedUser)
           }
         },
         error =>  this.msg = <any>error
       )
+  }
+
+  /**
+   * タグ名とタグを追加したユーザとタグを追加したユーザ数の取得する関数
+   * 
+   * @param taggedUser
+   * @return array タグ名、そのユーザとユーザ数を含む配列
+   */
+  private getTagRelation(taggedUser: any[]){
+    let tags = []
+    for(let key in taggedUser){
+      let tag = {'name': key, 'tagged': taggedUser[key], 'cnt': taggedUser[key].length}
+      tags.push(tag)
+    }
+    tags.sort((a: any, b: any) => {
+      if(a.cnt > b.cnt) return -1;
+      if(a.cnt < b.cnt) return 1;
+      return 0;
+    });
+    return tags
   }
 
   detail(user_id: string){

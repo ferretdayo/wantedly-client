@@ -16,8 +16,7 @@ export class UserComponent implements OnInit {
   users: any[] = []
   loginUser: any = {}
   user: any = {}
-  userTags: any[]
-  taggerUser: any[]
+  taggedUser: any[]
   skill: string
   error: boolean = false
 
@@ -85,8 +84,7 @@ export class UserComponent implements OnInit {
         data => {
           if(data.status === true){
             this.user = data.user
-            this.userTags = data.tag
-            this.taggerUser = data.taggerUser
+            this.taggedUser = this.getTagRelation(data.taggedUser)
             this.error = false
           }else{
           }
@@ -98,8 +96,23 @@ export class UserComponent implements OnInit {
       )
   }
 
-  relateTag(userTags: any[], taggerUser: any[]){
-    
+  /**
+   * タグ名とタグを追加したユーザとタグを追加したユーザ数の取得する関数
+   * 
+   * @param taggedUser
+   * @return array タグ名、そのユーザとユーザ数を含む配列
+   */
+  private getTagRelation(taggedUser: any[]){
+    let tags = []
+    for(let key in taggedUser){
+      let tag = {'name': key, 'tagged': taggedUser[key], 'cnt': taggedUser[key].length}
+      tags.push(tag)
+    }
+    tags.sort((a: any, b: any) => {
+      if(a.cnt > b.cnt) return -1;
+      if(a.cnt < b.cnt) return 1;
+      return 0;
+    });
+    return tags
   }
-
 }

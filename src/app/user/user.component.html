@@ -8,7 +8,19 @@
       <button class="btn btn-primary skill-button" (click)="staticModal.show()">スキルを推薦する</button>
     </div>
     <div>
-      <p *ngFor="let tag of userTags">{{tag.tag}}</p>
+      <div *ngFor="let tag of taggedUser">
+        <div class="tag">
+          <div class="tag-count">
+            {{tag.cnt}}
+          </div>
+          <div class="tag-name">
+            {{tag.name}}
+          </div>
+        </div>
+        <span class="tagged-user" *ngFor="let tagged of tag.tagged">
+          {{tagged.name}}
+        </span>
+      </div>
     </div>
   </div>
   <!-- Other Users -->
