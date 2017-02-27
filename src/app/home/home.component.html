@@ -8,18 +8,18 @@
       <button class="btn btn-primary skill-button" (click)="staticModal.show()">スキルを追加する</button>
     </div>
     <div>
-      <div *ngFor="let tag of taggedUser">
-        <div class="tag">
-          <div class="tag-count">
-            {{tag.cnt}}
-          </div>
-          <div class="tag-name">
-            {{tag.name}}
-          </div>
+      <div class="tags" *ngFor="let tag of taggedUser">
+        <div class="tag-count">
+          {{tag.cnt}}
         </div>
-        <span class="tagged-user" *ngFor="let tagged of tag.tagged">
-          {{tagged.name}}
-        </span>
+        <div class="tag-name">
+          {{tag.name}}
+        </div>
+        <div class="tagged">
+          <span class="tagged-user" *ngFor="let tagged of tag.tagged">
+            {{tagged.name}}
+          </span>
+        </div>
       </div>
     </div>
   </div>

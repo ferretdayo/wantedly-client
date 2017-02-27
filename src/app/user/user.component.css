@@ -29,14 +29,14 @@ li a{
     height: 20px;
 }
 
-.tag{
-    display: inline-block;
+.tags{
+    display: flex;
+    justify-content:flex-start;
+    width: inherit;
     margin: 10px 30px 10px 0;
-    width: 100px;
 }
 
 .tag-count{
-    display: inline-block;
     border-radius: 20px;
     background-color: #0076FF;
     color: white;
@@ -60,8 +60,12 @@ li a{
 }
 
 .tag-name{
-    display: inline;
-    margin-left: 15px;
+    width: 100px;
+    margin: auto 0 auto 50px;
+}
+
+.tagged{
+    margin: auto 0 auto 10px;
 }
 
 .tagged-user{
