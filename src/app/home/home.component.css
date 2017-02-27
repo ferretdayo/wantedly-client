@@ -5,10 +5,12 @@
 }
 
 .your-info{
+    display: inline-block;
     width: 70%;
 }
 
 .recommend{
+    display: inline-block;
     width: 30%;
 }
 
