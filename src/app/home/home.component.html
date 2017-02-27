@@ -24,10 +24,14 @@
   </div>
   <!-- Other Users -->
   <div class="recommend">
+    <div class="recommend-title">他のユーザ</div>
     <ul *ngFor="let user of users">
       <li><a [routerLink]="['/user', user.id]">{{user.name}}</a></li>
     </ul>
   </div>
+</div>
+<div *ngIf="error">
+  ユーザがいません
 </div>
 
 <!-- Modal -->

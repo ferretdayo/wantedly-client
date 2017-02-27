@@ -23,7 +23,7 @@ ul li{
 li a{
     display: block;
     cursor: pointer;
-    background-color: #cdc333;
+    border-bottom: 2px solid #FFDFDF;
     text-decoration: none;
     width: 150px;
     height: 20px;
@@ -46,11 +46,31 @@ li a{
     padding: 10px;
 }
 
+.tag-add{
+    position: relative;
+    color: black;
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid #0076FF;
+    background-color: white;
+    cursor: pointer;
+    top: -5px;
+    right: -15px;
+}
+
 .tag-name{
-    display: inline-block;
+    display: inline;
+    margin-left: 15px;
 }
 
 .tagged-user{
     border-bottom: 2px solid #D4E8FF;
     margin-right: 8px;
+}
+
+.recommend-title{
+    font-size: 25px;
+    margin-left: 55px;
+    margin-bottom: 50px;
 }

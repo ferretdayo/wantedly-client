@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   loginUser: any = {}
   taggedUser: any[]
   skill: string
+  error: boolean = false
 
   constructor(
     private userService: UserService,
@@ -74,10 +75,14 @@ export class HomeComponent implements OnInit {
         data => {
           if(data.status === true){
             this.taggedUser = this.getTagRelation(data.taggedUser)
+            this.error = false
             console.log(this.taggedUser)
           }
         },
-        error =>  this.msg = <any>error
+        error =>  {
+          this.msg = <any>error
+          this.error = true
+        }
       )
   }
 
@@ -90,7 +95,13 @@ export class HomeComponent implements OnInit {
   private getTagRelation(taggedUser: any[]){
     let tags = []
     for(let key in taggedUser){
-      let tag = {'name': key, 'tagged': taggedUser[key], 'cnt': taggedUser[key].length}
+      let isTagged = true;
+      for(let i = 0; i < taggedUser[key].length; i++){
+        if(taggedUser[key][i].id == this.loginUser.id){
+          isTagged = false;
+        }
+      }
+      let tag = {'name': key, 'tagged': taggedUser[key], 'cnt': taggedUser[key].length, 'isTagged': isTagged}
       tags.push(tag)
     }
     tags.sort((a: any, b: any) => {

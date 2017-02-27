@@ -85,6 +85,7 @@ export class UserComponent implements OnInit {
           if(data.status === true){
             this.user = data.user
             this.taggedUser = this.getTagRelation(data.taggedUser)
+            console.log(this.taggedUser)
             this.error = false
           }else{
           }
@@ -92,6 +93,31 @@ export class UserComponent implements OnInit {
         error =>  {
           this.msg = <any>error
           this.error = true
+        }
+      )
+  }
+
+  /**
+   * 指定のタグに+1し、人数を追加する
+   */
+  addUserByTag(tag: string){
+    this.skillService.addUserByTag(
+      tag,
+      {
+        user_id: this.user.id,
+        add_userid: this.loginUser.id
+      }
+    ).subscribe(
+        data => {
+          if(data.status === true){
+            console.log(this.taggedUser)
+            this.showSkill(this.user.id)
+            this.error = false
+          }else{
+          }
+        },
+        error =>  {
+          this.msg = <any>error
         }
       )
   }
@@ -105,7 +131,13 @@ export class UserComponent implements OnInit {
   private getTagRelation(taggedUser: any[]){
     let tags = []
     for(let key in taggedUser){
-      let tag = {'name': key, 'tagged': taggedUser[key], 'cnt': taggedUser[key].length}
+      let isTagged = true;
+      for(let i = 0; i < taggedUser[key].length; i++){
+        if(taggedUser[key][i].id == this.loginUser.id){
+          isTagged = false;
+        }
+      }
+      let tag = {'name': key, 'tagged': taggedUser[key], 'cnt': taggedUser[key].length, 'isTagged': isTagged}
       tags.push(tag)
     }
     tags.sort((a: any, b: any) => {

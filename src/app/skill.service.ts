@@ -26,11 +26,11 @@ export class SkillService {
   /**
    * Skillに１つカウント（押したユーザの）追加
    */
-  addSkill(data: Object): Observable<any>{
+  addUserByTag(tagName: string, data: Object): Observable<any>{
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
-    return this.http.post("http://localhost:3000/tags", body, options)
+    return this.http.post("http://localhost:3000/tags/"+ tagName, body, options)
       .map(this.extractData)
   }
 

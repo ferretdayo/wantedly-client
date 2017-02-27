@@ -13,7 +13,7 @@
 }
 
 .skill-button{
-    margin-right: 50px;
+    margin-left: 50px;
 }
 
 ul li{
@@ -23,7 +23,7 @@ ul li{
 li a{
     display: block;
     cursor: pointer;
-    background-color: #cdc333;
+    border-bottom: 2px solid #FFDFDF;
     text-decoration: none;
     width: 150px;
     height: 20px;
@@ -47,10 +47,17 @@ li a{
 }
 
 .tag-name{
-    display: inline-block;
+    display: inline;
+    margin-left: 15px;
 }
 
 .tagged-user{
     border-bottom: 2px solid #D4E8FF;
     margin-right: 8px;
+}
+
+.recommend-title{
+    font-size: 25px;
+    margin-left: 55px;
+    margin-bottom: 50px;
 }
