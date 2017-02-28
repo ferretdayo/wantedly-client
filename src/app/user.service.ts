@@ -21,7 +21,7 @@ export class UserService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    return this.http.post("http://localhost:3000/users", body, options)
+    return this.http.post("https://wantedly-practice.herokuapp.com/users", body, options)
       .map(this.extractData)
   }
 
@@ -32,7 +32,7 @@ export class UserService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    return this.http.post("http://localhost:3000/logins", body, options)
+    return this.http.post("https://wantedly-practice.herokuapp.com/logins", body, options)
       .map(this.extractData)
   }
 
@@ -40,7 +40,7 @@ export class UserService {
    * 全てのユーザを取得
    */
   getUsers(): Observable<any>{
-    return this.http.get("http://localhost:3000/users", {withCredentials: true})
+    return this.http.get("https://wantedly-practice.herokuapp.com/users", {withCredentials: true})
       .map(this.extractData)
   }
 
