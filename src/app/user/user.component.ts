@@ -23,7 +23,8 @@ export class UserComponent implements OnInit {
   constructor(
     private userService: UserService,
     private skillService: SkillService,
-    private router: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { 
   }
 
@@ -43,7 +44,7 @@ export class UserComponent implements OnInit {
     /**
      * pathのparamの選択されたユーザIDからその人のスキルを表示
      */
-    this.router.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       let id = params['id'];
       this.showSkill(id);
     });
@@ -54,14 +55,13 @@ export class UserComponent implements OnInit {
    */
   addTag(){
     // 入力がない場合
-    if(this.skill === "")
-      return;
+    if(this.skill == "")
+      return false;
     console.log(this.skill)
     // スキルのタグの追加
     this.skillService.addSkillTag({
         id: this.user.id,          /* 誰に向けてのタグか */
         tag: this.skill,                /* タグの値 */
-        add_userid: this.loginUser.id   /* 誰が追加したか */
       })
       .subscribe(
         data => {
@@ -69,6 +69,10 @@ export class UserComponent implements OnInit {
             this.skill = ""
             console.log("success to add skillTag");
             this.showSkill(this.user.id)
+          } else {
+            if(data.msg == "please login"){
+              this.router.navigate(['']);
+            }
           }
         },
         error =>  this.msg = <any>error
@@ -87,7 +91,10 @@ export class UserComponent implements OnInit {
             this.taggedUser = this.getTagRelation(data.taggedUser)
             console.log(this.taggedUser)
             this.error = false
-          }else{
+          } else {
+            if(data.msg == "please login"){
+              this.router.navigate(['']);
+            }
           }
         },
         error =>  {
@@ -113,7 +120,10 @@ export class UserComponent implements OnInit {
             console.log(this.taggedUser)
             this.showSkill(this.user.id)
             this.error = false
-          }else{
+          } else {
+            if(data.msg == "please login"){
+              this.router.navigate(['']);
+            }
           }
         },
         error =>  {

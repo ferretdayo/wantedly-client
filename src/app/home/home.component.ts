@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { UserService } from '../user.service';
 import { SkillService } from '../skill.service';
@@ -21,6 +22,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private skillService: SkillService,
+    private router: Router
   ) { 
     /**
      * 全ユーザの表示
@@ -28,10 +30,16 @@ export class HomeComponent implements OnInit {
     this.userService.getUsers()
       .subscribe(
         data => {
-          this.users = data.users
-          this.loginUser = data.current_user
-          this.msg = data.user_id
-          this.showSkill(this.loginUser.id);
+          if(data.status === true){
+            this.users = data.users
+            this.loginUser = data.current_user
+            this.msg = data.user_id
+            this.showSkill(this.loginUser.id);
+          } else {
+            if(data.msg == "please login"){
+              this.router.navigate(['']);
+            }
+          }
         },
         error =>  this.msg = <any>error
       );
@@ -45,21 +53,23 @@ export class HomeComponent implements OnInit {
    */
   addTag(){
     // 入力がない場合
-    if(this.skill === "")
-      return;
+    if(this.skill == "")
+      return false;
     console.log(this.skill)
     // スキルのタグの追加
     this.skillService.addSkillTag({
         id: this.loginUser.id,          /* 誰に向けてのタグか */
         tag: this.skill,                /* タグの値 */
-        add_userid: this.loginUser.id   /* 誰が追加したか */
       })
       .subscribe(
         data => {
           if(data.status === true){
             this.skill = ""
             this.showSkill(this.loginUser.id)
-            console.log("success to add skillTag");
+          } else {
+            if(data.msg == "please login"){
+              this.router.navigate(['']);
+            }
           }
         },
         error =>  this.msg = <any>error
@@ -76,7 +86,10 @@ export class HomeComponent implements OnInit {
           if(data.status === true){
             this.taggedUser = this.getTagRelation(data.taggedUser)
             this.error = false
-            console.log(this.taggedUser)
+          } else {
+            if(data.msg == "please login"){
+              this.router.navigate(['']);
+            }
           }
         },
         error =>  {
