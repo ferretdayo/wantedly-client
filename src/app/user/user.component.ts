@@ -35,7 +35,7 @@ export class UserComponent implements OnInit {
       .subscribe(
         data => {
           this.users = data.users
-          this.loginUser = data.users[0]
+          this.loginUser = data.current_user
           this.msg = data.user_id
         },
         error =>  this.msg = <any>error

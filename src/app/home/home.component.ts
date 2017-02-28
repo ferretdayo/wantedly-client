@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
       .subscribe(
         data => {
           this.users = data.users
-          this.loginUser = data.users[0]
+          this.loginUser = data.current_user
           this.msg = data.user_id
           this.showSkill(this.loginUser.id);
         },
