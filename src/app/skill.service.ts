@@ -18,7 +18,7 @@ export class SkillService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    return this.http.post("/tags", body, options)
+    return this.http.post("https://wantedly-practice.herokuapp.com/tags", body, options)
       .map(this.extractData)
   }
 
@@ -30,7 +30,7 @@ export class SkillService {
     let body = JSON.stringify(data);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers, withCredentials: true });
-    return this.http.post("/tags/"+ tagName, body, options)
+    return this.http.post("https://wantedly-practice.herokuapp.com/tags/"+ tagName, body, options)
       .map(this.extractData)
   }
 
@@ -38,7 +38,7 @@ export class SkillService {
    * ユーザのスキル情報を取得
    */
   getUserSkill(user_id: number){
-    return this.http.get("/users/" + user_id, {withCredentials: true})
+    return this.http.get("https://wantedly-practice.herokuapp.com/users/" + user_id, {withCredentials: true})
       .map(this.extractData)
   }
 
