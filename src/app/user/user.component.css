@@ -4,6 +4,12 @@
     width: 100vw;
 }
 
+nav{
+    height: 50px;
+    width: 100vw;
+    background-color: #F4F4F4;
+}
+
 .your-info{
     width: 70%;
 }
