@@ -9,9 +9,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
-    "heroku": "concurrent \"npm run tsc\" \"npm run lite\" ",
-    "start-heroku": "concurrent \"npm run tsc\" \"npm run http-server\" "
+    "heroku-prebuild": "npm install -g http-server",
+    "heroku-postbuild": "ng build --prod",
+    "start": "http-server dist/",
   },
   "private": true,
   "dependencies": {
