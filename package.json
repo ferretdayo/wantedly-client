@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start": "concurrent \"npm run tsc:w\" \"npm run lite\" ",
+    "heroku": "concurrent \"npm run tsc\" \"npm run lite\" ",
     "start-heroku": "concurrent \"npm run tsc\" \"npm run http-server\" "
   },
   "private": true,
